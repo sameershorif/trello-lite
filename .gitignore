@@ -18,3 +18,6 @@ build/
 
 # VS Code settings
 .vscode/
+# env
+.env
+trello-lite-server/.env

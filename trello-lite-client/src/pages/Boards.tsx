@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../lib/api";
+import { Link } from "react-router-dom"
 
 type Board = { _id: string; title: string };
 
@@ -20,7 +21,9 @@ export default function Boards() {
     load();
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   return (
     <div style={{ maxWidth: 640, margin: "40px auto", padding: 16 }}>
@@ -39,6 +42,20 @@ export default function Boards() {
           <li key={b._id}>{b.title}</li>
         ))}
       </ul>
+
+<ul>
+  {boards.map(b => (
+    <li key={b._id}><Link to={`/boards/${b._id}`}>{b.title}</Link></li>
+  ))}
+</ul>
+        
+      <button
+  onClick={() => { localStorage.removeItem("token"); window.location.href = "/login"; }}
+  style={{ position: "fixed", top: 12, right: 12 }}
+>
+  Logout
+</button>
+
     </div>
   );
 }
